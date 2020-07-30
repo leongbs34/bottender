@@ -1,1 +1,8 @@
 #Subject title = google meet link
+CC LAB = https://meet.google.com/thv-nbei-hpg
+CC Lec = https://meet.google.com/ung-rxnd-mqt
+CI = https://meet.google.com/lookup/br7w4evd7u?authuser=2&hs=179
+ES = https://meet.google.com/lookup/hbv3m73cgk?authuser=2&hs=179
+CV = https://meet.google.com/lookup/fjhwcnibjy?authuser=2&hs=179
+AT LAB = https://meet.google.com/lookup/huoli57sms
+AT Lec = https://meet.google.com/lookup/bw4peh6wgi
