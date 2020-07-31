@@ -1,6 +1,7 @@
 import pyautogui as pg
 import re
 import os
+from time import sleep
 
 def getLink(): #get the line of selected google meet link
     try:
@@ -10,10 +11,6 @@ def getLink(): #get the line of selected google meet link
         getLink()
     return linkSelect
 
-
-pg.hotkey('winleft') #press windows key on keyboard
-
-pg.typewrite('chrome\n') #type in chrome in search bar and enterchrome
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 meetlink = os.path.join(THIS_FOLDER, 'meetlink.txt')
 
@@ -27,13 +24,20 @@ with open(meetlink, 'r') as fp:
     mo = re.findall('https.*', fp.read())
 link = mo[getLink()-1] #store google meet link to 'link' variable
 
+pg.hotkey('winleft') #press windows key on keyboard
+sleep(1)
+pg.typewrite('chrome\n',0.2) #type in chrome in search bar and enter
 
-#pg.typewrite(gmeet) #enter link from meetlink.txt
+pg.typewrite(link + '\n') #enter link from meetlink.txt
 
-#pg.hotkey('winkey','up') #fullscreen google chrome
+pg.hotkey('winkey','up') #fullscreen google chrome
+sleep(5)
+pg.hotkey('ctrl','d') #mute mic
+sleep(1)
+pg.hotkey('ctrl','e') #hide cam
 
-#mute mic and cam
-#join classroom
+pg.click(1271,596) #join classroom
+
 #click on chat
 #start recording
 #scan for attendance QR code
