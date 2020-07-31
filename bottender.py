@@ -26,7 +26,7 @@ link = mo[getLink()-1] #store google meet link to 'link' variable
 
 pg.hotkey('winleft') #press windows key on keyboard
 sleep(1)
-pg.typewrite('chrome\n',0.2) #type in chrome in search bar and enter
+pg.typewrite('chrome\n',0.1) #type in chrome in search bar and enter
 
 pg.typewrite(link + '\n') #enter link from meetlink.txt
 
@@ -37,9 +37,20 @@ sleep(1)
 pg.hotkey('ctrl','e') #hide cam
 
 pg.click(1271,596) #join classroom
+sleep(1)
+pg.click(1680,125) #show chat
 
-#click on chat
-#start recording
+#open obs
+pg.hotkey('winleft') #press windows key on keyboard
+sleep(1)
+pg.typewrite('obs\n',0.1)
+sleep(4)
+
+#start recording , requires start recording and stop recording hotkey
+pg.hotkey('f1')
+sleep(1)
+pg.hotkey('alt','\t') #alt tab into chrome
+
 #scan for attendance QR code
 #login mmu
 #stop recording after 2 hours
