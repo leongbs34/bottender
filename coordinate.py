@@ -6,6 +6,3 @@ sleep(5) #wait for 5 sec
 x,y = pyautogui.position() #inputs the current mouse position after 5 sec
 print(x,y) #prints out the mouse position
 
-pyautogui.moveTo(x,y) #simulate mouse movement to the coordinates
-pyautogui.doubleclick() #double click on the coordinates
-
