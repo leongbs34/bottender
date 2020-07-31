@@ -1,7 +1,9 @@
 import pyautogui as pg
+import sys
 import re
 import os
-import time
+import glob
+from time import time
 from time import sleep
 from pyzbar import pyzbar
 from imutils.video import FileVideoStream
@@ -20,6 +22,8 @@ def getLink(): #get the line of selected google meet link
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 meetlink = os.path.join(THIS_FOLDER, 'meetlink.txt')
 
+hours = time() // 3600 #start timer
+
 i = 0
 with open(meetlink, 'r') as fp:
     for lines in (fp.read().split('\n'))[1:]: #output selection of meet link
@@ -33,9 +37,8 @@ link = mo[getLink()-1] #store google meet link to 'link' variable
 pg.hotkey('winleft') #press windows key on keyboard
 sleep(1)
 pg.typewrite('chrome\n',0.1) #type in chrome in search bar and enter
-
+sleep(5)
 pg.typewrite(link + '\n') #enter link from meetlink.txt
-
 pg.hotkey('winkey','up') #fullscreen google chrome
 sleep(5)
 pg.hotkey('ctrl','d') #mute mic
@@ -58,9 +61,14 @@ sleep(1)
 pg.hotkey('alt','\t') #alt tab into chrome
 
 #QR scanner
+vidDir = 'D:\Google meet' #Directory of recorded OBS vid
+list_of_files = glob.glob(vidDir + '\*.mkv') # * means all if need specific format then *.csv
+latest_file = max(list_of_files, key=os.path.getctime) #variable to store latest vid path
+print(latest_file)
+
 print("Scanning for QR code...")
-fvs = FileVideoStream('D:\\Google meet\\agent tech\\lec 2.mkv').start()
-time.sleep(1.0)
+fvs = FileVideoStream(latest_file).start() #to test use 'D:\\Google meet\\agent tech\\lec 2.mkv'
+sleep(1)
 
 attendance = ''
 # loop over the frames from the video stream
@@ -83,10 +91,24 @@ while True:
 	if re.search('mmls', attendance):
 		break
 
-print(attendance)
+print('Attendance link: '+attendance)
 cv2.destroyAllWindows()
 fvs.stop()
 
 #login mmu
-#stop recording after 2 hours
-#close program
+pg.hotkey('ctrl','t') #open new tab
+sleep(1)
+pg.typewrite(attendance+'\n') #go to attendance link
+sleep(3)
+pg.click(633,400) #sign attendance
+sleep(5)
+pg.hotkey('ctrl','w') #close attendance tab
+
+#after 2 hours, stop recording, close chrome and program
+while True:
+    if hours >= 2:
+        sleep(1)
+        pg.hotkey('ctrl','w') #close chrome
+        sleep(1)
+        pg.hotkey('f1') #stop recording
+        sys.exit()
