@@ -17,7 +17,6 @@ pg.typewrite('chrome\n') #type in chrome in search bar and enterchrome
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 meetlink = os.path.join(THIS_FOLDER, 'meetlink.txt')
 
-#fp = open(meetlink, 'r') #line to read google meet link
 i = 0
 with open(meetlink, 'r') as fp:
     for lines in (fp.read().split('\n'))[1:]: #output selection of meet link
@@ -32,3 +31,12 @@ link = mo[getLink()-1] #store google meet link to 'link' variable
 #pg.typewrite(gmeet) #enter link from meetlink.txt
 
 #pg.hotkey('winkey','up') #fullscreen google chrome
+
+#mute mic and cam
+#join classroom
+#click on chat
+#start recording
+#scan for attendance QR code
+#login mmu
+#stop recording after 2 hours
+#close program
