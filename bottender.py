@@ -1,7 +1,13 @@
 import pyautogui as pg
 import re
 import os
+import time
 from time import sleep
+from pyzbar import pyzbar
+from imutils.video import FileVideoStream
+import imutils
+import argparse
+import cv2
 
 def getLink(): #get the line of selected google meet link
     try:
@@ -51,7 +57,36 @@ pg.hotkey('f1')
 sleep(1)
 pg.hotkey('alt','\t') #alt tab into chrome
 
-#scan for attendance QR code
+#QR scanner
+print("Scanning for QR code...")
+fvs = FileVideoStream('D:\\Google meet\\agent tech\\lec 2.mkv').start()
+time.sleep(1.0)
+
+attendance = ''
+# loop over the frames from the video stream
+while True:
+	# grab the frame from the threaded video stream 
+	frame = fvs.read()
+	# find the barcodes in the frame and decode each of the barcodes
+	barcodes = pyzbar.decode(frame)
+
+		# loop over the detected barcodes
+	for barcode in barcodes:
+		# extract the bounding box location of the barcode and draw
+		# the bounding box surrounding the barcode on the image
+		(x, y, w, h) = barcode.rect
+		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+		# the barcode data is a bytes object so if we want to draw it
+		# on our output image we need to convert it to a string first
+		attendance = barcode.data.decode("utf-8")
+
+	if re.search('mmls', attendance):
+		break
+
+print(attendance)
+cv2.destroyAllWindows()
+fvs.stop()
+
 #login mmu
 #stop recording after 2 hours
 #close program
