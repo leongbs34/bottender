@@ -62,7 +62,7 @@ pg.hotkey('alt','\t') #alt tab into chrome
 
 #QR scanner
 with open(meetlink, 'r') as fp:
-    vidDir = re.findall('(?<=directory\s=\s).*', fp.read()) #Directory of recorded OBS vid
+    vidDir = (re.findall('(?<=directory\s=\s).*', fp.read()))[0] #Directory of recorded OBS vid
 list_of_files = glob.glob(vidDir + '\*.mkv') # * means all if need specific format then *.csv
 latest_file = max(list_of_files, key=os.path.getctime) #variable to store latest vid path
 print(latest_file)
