@@ -22,7 +22,7 @@ def getLink(): #get the line of selected google meet link
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 meetlink = os.path.join(THIS_FOLDER, 'meetlink.txt')
 
-hours = time() // 3600 #start timer
+start_time = time() #start timer
 
 i = 0
 with open(meetlink, 'r') as fp:
@@ -80,11 +80,14 @@ while True:
                 attendance = barcode.data.decode("utf-8")
 
         try:
+                hours = (start_time - time()) / 3600
                 if attendance != '': #if attendance found break loop
                         print('Attendance link found: ' + attendance)
+                        sleep(2)
                         break
 
                 if hours >= 2:
+                    print('Attendance link not found after 2h')
                     sleep(1)
                     pg.hotkey('ctrl','w') #close chrome
                     sleep(1)
@@ -106,7 +109,9 @@ pg.hotkey('ctrl','w') #close attendance tab
 
 #after 2 hours, stop recording, close chrome and program
 while True:
+    hours = (start_time - time()) / 3600
     if hours >= 2:
+        print(hours)
         sleep(1)
         pg.hotkey('ctrl','w') #close chrome
         sleep(1)
