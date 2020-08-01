@@ -61,40 +61,31 @@ sleep(1)
 pg.hotkey('alt','\t') #alt tab into chrome
 
 #QR scanner
-with open(meetlink, 'r') as fp:
-    vidDir = (re.findall('(?<=directory\s=\s).*', fp.read()))[0] #Directory of recorded OBS vid
-list_of_files = glob.glob(vidDir + '\*.mkv') # * means all if need specific format then *.csv
-latest_file = max(list_of_files, key=os.path.getctime) #variable to store latest vid path
-print(latest_file)
-
-print("Scanning for QR code...")
-fvs = FileVideoStream(latest_file).start() #to test use 'D:\\Google meet\\agent tech\\lec 2.mkv'
-sleep(1)
-
-attendance = ''
-# loop over the frames from the video stream
 while True:
-	# grab the frame from the threaded video stream 
-	frame = fvs.read()
-	# find the barcodes in the frame and decode each of the barcodes
-	barcodes = pyzbar.decode(frame)
+        pg.screenshot('ss.png') #take a screenshot
+        image = cv2.imread('ss.png') # load the screenshot
 
-		# loop over the detected barcodes
-	for barcode in barcodes:
-		# extract the bounding box location of the barcode and draw
-		# the bounding box surrounding the barcode on the image
-		(x, y, w, h) = barcode.rect
-		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
-		# the barcode data is a bytes object so if we want to draw it
-		# on our output image we need to convert it to a string first
-		attendance = barcode.data.decode("utf-8")
+        # find the barcodes in the image and decode each of the barcodes
+        barcodes = pyzbar.decode(image)
 
-	if re.search('mmls', attendance):
-		break
+        # loop over the detected barcodes
+        for barcode in barcodes:
+                # extract the bounding box location of the barcode and draw the
+                # bounding box surrounding the barcode on the image
+                (x, y, w, h) = barcode.rect
+                cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
-print('Attendance link: '+attendance)
-cv2.destroyAllWindows()
-fvs.stop()
+                # the barcode data is a bytes object so if we want to draw it on
+                # our output image we need to convert it to a string first
+                attendance = barcode.data.decode("utf-8")
+
+        try:
+                if attendance != '': #if attendance found break loop
+                        print('Attendance link found: ' + attendance)
+                        break
+        except:
+                sleep(5)
+                continue
 
 #login mmu
 pg.hotkey('ctrl','t') #open new tab
