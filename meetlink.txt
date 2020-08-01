@@ -1,4 +1,5 @@
 #Subject title = google meet link (with user selected)
+OBS Video directory = D:\Google meet
 CC LAB = https://meet.google.com/thv-nbei-hpg?pli=1&authuser=2
 CC Lec = https://meet.google.com/ung-rxnd-mqt?pli=1&authuser=2
 CI = https://meet.google.com/lookup/br7w4evd7u?authuser=2&hs=179

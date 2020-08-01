@@ -26,7 +26,7 @@ hours = time() // 3600 #start timer
 
 i = 0
 with open(meetlink, 'r') as fp:
-    for lines in (fp.read().split('\n'))[1:]: #output selection of meet link
+    for lines in (fp.read().split('\n'))[2:]: #output selection of meet link
         i += 1
         print(str(i) + ': ' + lines)
 
@@ -61,7 +61,8 @@ sleep(1)
 pg.hotkey('alt','\t') #alt tab into chrome
 
 #QR scanner
-vidDir = 'D:\Google meet' #Directory of recorded OBS vid
+with open(meetlink, 'r') as fp:
+    vidDir = re.findall('(?<=directory\s=\s).*', fp.read()) #Directory of recorded OBS vid
 list_of_files = glob.glob(vidDir + '\*.mkv') # * means all if need specific format then *.csv
 latest_file = max(list_of_files, key=os.path.getctime) #variable to store latest vid path
 print(latest_file)
