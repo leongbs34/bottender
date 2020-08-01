@@ -83,6 +83,14 @@ while True:
                 if attendance != '': #if attendance found break loop
                         print('Attendance link found: ' + attendance)
                         break
+
+                if hours >= 2:
+                    sleep(1)
+                    pg.hotkey('ctrl','w') #close chrome
+                    sleep(1)
+                    pg.hotkey('f1') #stop recording
+                    sys.exit()
+                    
         except:
                 sleep(5)
                 continue
