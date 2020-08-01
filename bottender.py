@@ -80,7 +80,7 @@ while True:
                 attendance = barcode.data.decode("utf-8")
 
         try:
-                hours = (start_time - time()) / 3600
+                hours = (time() - start_time ) / 3600
                 if attendance != '': #if attendance found break loop
                         print('Attendance link found: ' + attendance)
                         sleep(2)
@@ -109,7 +109,7 @@ pg.hotkey('ctrl','w') #close attendance tab
 
 #after 2 hours, stop recording, close chrome and program
 while True:
-    hours = (start_time - time()) / 3600
+    hours = (time() - start_time ) / 3600
     if hours >= 2:
         print(hours)
         sleep(1)
