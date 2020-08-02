@@ -25,7 +25,7 @@ start_time = time() #start timer
 
 i = 0
 with open(meetlink, 'r') as fp:
-    for lines in (fp.read().split('\n'))[2:]: #output selection of meet link
+    for lines in (fp.read().split('\n'))[1:]: #output selection of meet link
         i += 1
         print(str(i) + ': ' + lines)
 
@@ -55,7 +55,8 @@ pg.typewrite('obs\n',0.1)
 sleep(4)
 
 #start recording , requires start recording and stop recording hotkey
-pg.hotkey('f1')
+hotkeyRec = 'f1'
+pg.hotkey(hotkeyRec)
 sleep(1)
 pg.hotkey('alt','\t') #alt tab into chrome
 
@@ -91,7 +92,7 @@ while True:
                     sleep(1)
                     pg.hotkey('ctrl','w') #close chrome
                     sleep(1)
-                    pg.hotkey('f1') #stop recording
+                    pg.hotkey(hotkeyRec) #stop recording
                     sys.exit()
                     
         except:
@@ -115,5 +116,5 @@ while True:
         sleep(1)
         pg.hotkey('ctrl','w') #close chrome
         sleep(1)
-        pg.hotkey('f1') #stop recording
+        pg.hotkey(hotkeyRec) #stop recording
         sys.exit()
