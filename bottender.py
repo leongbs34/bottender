@@ -6,9 +6,7 @@ import glob
 from time import time
 from time import sleep
 from pyzbar import pyzbar
-from imutils.video import FileVideoStream
 import imutils
-import argparse
 import cv2
 
 def getLink(): #get the line of selected google meet link
