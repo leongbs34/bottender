@@ -33,8 +33,13 @@ with open(meetlink, 'r') as fp:
     mo = re.findall('https.*', fp.read())
 link = mo[getLink()-1] #store google meet link to 'link' variable
 
+print('''Bot will take control of your computer for awhile, please do not press anything until mention
+Beginning in 3 seconds...''')
+sleep(3)
+
 pg.hotkey('winleft') #press windows key on keyboard
 sleep(1)
+pg.click(662,53) #click on url 
 pg.typewrite('chrome\n',0.1) #type in chrome in search bar and enter
 sleep(5)
 pg.typewrite(link + '\n') #enter link from meetlink.txt
@@ -44,6 +49,7 @@ pg.hotkey('ctrl','d') #mute mic
 sleep(1)
 pg.hotkey('ctrl','e') #hide cam
 
+sleep(3)
 pg.click(1271,596) #join classroom
 sleep(1)
 pg.click(1680,125) #show chat
@@ -52,13 +58,16 @@ pg.click(1680,125) #show chat
 pg.hotkey('winleft') #press windows key on keyboard
 sleep(1)
 pg.typewrite('obs\n',0.1)
-sleep(4)
+sleep(5)
 
 #start recording , requires start recording and stop recording hotkey
 hotkeyRec = 'f1'
 pg.hotkey(hotkeyRec)
 sleep(1)
 pg.hotkey('alt','\t') #alt tab into chrome
+
+print('''Scanning for QR code...
+Bot control paused until QR code is found on screen''')
 
 #QR scanner
 while True:
@@ -84,7 +93,8 @@ while True:
                 hours = (time() - start_time ) / 3600
                 if attendance != '': #if attendance found break loop
                         print('Attendance link found: ' + attendance)
-                        sleep(2)
+                        print('Bot control beginning in 3 seconds, please do not touch anything until you are told')
+                        sleep(3)
                         break
 
                 if hours >= 2:
@@ -107,6 +117,7 @@ sleep(3)
 pg.click(633,400) #sign attendance
 sleep(5)
 pg.hotkey('ctrl','w') #close attendance tab
+print('Attendance signed, you may use your computer now, recording will stop after 2 hours')
 
 #after 2 hours, stop recording, close chrome and program
 while True:
