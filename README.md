@@ -18,3 +18,6 @@ How to use:
 7.After 2 hours, program will close chrome, stop recording, and terminate itself  
 
 **DO NOT USE THIS PROGRAM IF YOU ARE USING THE COMPUTER**
+
+DOWNLOAD
+https://drive.google.com/file/d/1RbiVZdlFaROWtczbCMGNYoqVihUMCvFv/view?usp=sharing
