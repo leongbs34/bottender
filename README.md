@@ -1,5 +1,5 @@
 # bottender
-An automated bot that helps you to attend class and sign attendance in google meet  
+An automated bot that helps you to attend class and sign attendance in google meet for mmu students
   
 Requirements:  
 OBS Studio  
@@ -16,3 +16,8 @@ How to use:
 5.Bot will open OBS and start recording  
 6.Bot will scan the google meet for attendance and sign it automatically  
 7.After 2 hours, program will close chrome, stop recording, and terminate itself  
+
+**DO NOT USE THIS PROGRAM IF YOU ARE USING THE COMPUTER**
+
+DOWNLOAD
+https://drive.google.com/file/d/1RbiVZdlFaROWtczbCMGNYoqVihUMCvFv/view?usp=sharing
