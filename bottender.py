@@ -51,9 +51,11 @@ sleep(1)
 pg.hotkey('ctrl','e') #hide cam
 
 sleep(3)
-pg.click(1271,596) #join classroom
+join = pg.locateOnScreen('join.png', confidence=0.9)
+pg.click(join[0], join[1]) #join classroom
 sleep(1)
-pg.click(1680,125) #show chat
+chat = pg.locateOnScreen('chat.png', confidence=0.9)
+pg.click(chat[0], chat[1]) #show chat
 
 #open obs
 pg.hotkey('winleft') #press windows key on keyboard
@@ -115,7 +117,7 @@ pg.hotkey('ctrl','t') #open new tab
 sleep(1)
 pg.typewrite(attendance+'\n') #go to attendance link
 sleep(3)
-pg.click(633,400) #sign attendance
+pg.press('enter') #sign attendance
 sleep(5)
 pg.hotkey('ctrl','w') #close attendance tab
 print('Attendance signed, you may use your computer now, recording will stop after 2 hours')
