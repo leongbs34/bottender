@@ -16,3 +16,5 @@ How to use:
 5.Bot will open OBS and start recording  
 6.Bot will scan the google meet for attendance and sign it automatically  
 7.After 2 hours, program will close chrome, stop recording, and terminate itself  
+
+**DO NOT USE THIS PROGRAM IF YOU ARE USING THE COMPUTER**
