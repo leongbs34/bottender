@@ -1,6 +1,7 @@
 import pyautogui as pg
 import sys
 import re
+from desktopmagic.screengrab_win32 import getScreenAsImage 
 import os
 import glob
 from time import time
@@ -60,7 +61,8 @@ pg.hotkey('alt','\t') #alt tab into chrome
 
 #QR scanner
 while True:
-        pg.screenshot('ss.png') #take a screenshot
+        entireScreen = getScreenAsImage()
+        entireScreen.save('ss.png', format='png') #take a screenshot
         image = cv2.imread('ss.png') # load the screenshot
 
         # find the barcodes in the image and decode each of the barcodes
