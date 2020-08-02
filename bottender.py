@@ -37,11 +37,12 @@ print('''Bot will take control of your computer for awhile, please do not press 
 Beginning in 3 seconds...''')
 sleep(3)
 
+print('Bot started')
 pg.hotkey('winleft') #press windows key on keyboard
 sleep(1)
-pg.click(662,53) #click on url 
 pg.typewrite('chrome\n',0.1) #type in chrome in search bar and enter
 sleep(5)
+pg.click(662,53) #click on url 
 pg.typewrite(link + '\n') #enter link from meetlink.txt
 pg.hotkey('winkey','up') #fullscreen google chrome
 sleep(5)
