@@ -13,10 +13,14 @@ import cv2
 def getLink(): #get the line of selected google meet link
     try:
         linkSelect = int(input('Please enter the digit of your selected google meet link; eg: 1,2,3,...\n'))
+        link = mo[linkSelect-1]
     except ValueError:
         print('Error, please enter only digits')
         getLink()
-    return linkSelect
+    except IndexError:
+        print('Error, selection not found')
+        getLink()
+        
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 meetlink = os.path.join(THIS_FOLDER, 'meetlink.txt')
@@ -31,7 +35,8 @@ with open(meetlink, 'r') as fp:
 
 with open(meetlink, 'r') as fp:
     mo = re.findall('https.*', fp.read())
-link = mo[getLink()-1] #store google meet link to 'link' variable
+link = '' #store google meet link to 'link' variable
+getLink()
 
 print('''Bot will take control of your computer for awhile, please do not press anything until mention
 Beginning in 3 seconds...''')
@@ -94,7 +99,7 @@ while True:
 
         try:
                 hours = (time() - start_time ) / 3600
-                if attendance != '': #if attendance found break loop
+                if re.search('mmls.*',attendance): #if attendance found break loop
                         print('Attendance link found: ' + attendance)
                         print('Bot control beginning in 3 seconds, please do not touch anything until you are told')
                         sleep(3)
@@ -132,3 +137,15 @@ while True:
         sleep(1)
         pg.hotkey(hotkeyRec) #stop recording
         sys.exit()
+
+    try:
+        left = pg.locateOnScreen('left.png', confidence=0.9)
+        if left:
+            pg.hotkey('ctrl','w') #close chrome
+            sleep(1)
+            pg.hotkey(hotkeyRec) #stop recording
+            sys.exit()
+    except:
+        continue
+    
+
