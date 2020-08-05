@@ -20,7 +20,8 @@ def getLink(): #get the line of selected google meet link
     except IndexError:
         print('Error, selection not found')
         getLink()
-        
+    return mo[linkSelect-1]
+
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 meetlink = os.path.join(THIS_FOLDER, 'meetlink.txt')
@@ -35,8 +36,9 @@ with open(meetlink, 'r') as fp:
 
 with open(meetlink, 'r') as fp:
     mo = re.findall('https.*', fp.read())
-link = '' #store google meet link to 'link' variable
-getLink()
+link = '' 
+link = getLink() #store google meet link to 'link' variable
+print(link)
 
 print('''Bot will take control of your computer for awhile, please do not press anything until mention
 Beginning in 3 seconds...''')
@@ -47,7 +49,6 @@ pg.hotkey('winleft') #press windows key on keyboard
 sleep(1)
 pg.typewrite('chrome\n',0.1) #type in chrome in search bar and enter
 sleep(5)
-pg.click(662,53) #click on url 
 pg.typewrite(link + '\n') #enter link from meetlink.txt
 pg.hotkey('winkey','up') #fullscreen google chrome
 sleep(5)
@@ -147,5 +148,3 @@ while True:
             sys.exit()
     except:
         continue
-    
-
