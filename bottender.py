@@ -49,6 +49,7 @@ pg.hotkey('winleft') #press windows key on keyboard
 sleep(1)
 pg.typewrite('chrome\n',0.1) #type in chrome in search bar and enter
 sleep(5)
+pg.click(541,55) #click on url bar
 pg.typewrite(link + '\n') #enter link from meetlink.txt
 pg.hotkey('winkey','up') #fullscreen google chrome
 sleep(5)
