@@ -4,7 +4,7 @@ An automated bot that helps you to attend class and sign attendance in google me
 Requirements:  
 OBS Studio  
 Google chrome  
-Setting OBS' start recording and stop recording hotkey to F1  
+Setting OBS' start recording and stop recording hotkey to F9 
 Google meet links has to have user selected already; eg: https://meet.google.com/xxx-xxxx-xxx?pli=1&authuser=2  
 Saved mmu id and password for attendance  
   
@@ -15,7 +15,7 @@ How to use:
 4.Bot will open chrome and connect to selected google meet  
 5.Bot will open OBS and start recording  
 6.Bot will scan the google meet for attendance and sign it automatically  
-7.After 2 hours, program will close chrome, stop recording, and terminate itself  
+7.After 2 hours or after detecting several participants leaving, program will close chrome, stop recording, and terminate itself  
 
 **DO NOT USE THIS PROGRAM IF YOU ARE USING THE COMPUTER**
 
