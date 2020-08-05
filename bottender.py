@@ -70,7 +70,7 @@ pg.typewrite('obs\n',0.1)
 sleep(5)
 
 #start recording , requires start recording and stop recording hotkey
-hotkeyRec = 'f1'
+hotkeyRec = 'f9'
 pg.hotkey(hotkeyRec)
 sleep(1)
 pg.hotkey('alt','\t') #alt tab into chrome
@@ -142,6 +142,7 @@ while True:
     try:
         left = pg.locateOnScreen('left.png', confidence=0.9)
         if left:
+            print('Several participants left detected, closing google chrome and stopping recording')
             pg.hotkey('ctrl','w') #close chrome
             sleep(1)
             pg.hotkey(hotkeyRec) #stop recording
