@@ -1,7 +1,7 @@
 import pyautogui as pg
 import sys
-import re
 from desktopmagic.screengrab_win32 import getScreenAsImage 
+import re
 import os
 import glob
 from time import time
@@ -13,15 +13,10 @@ import cv2
 def getLink(): #get the line of selected google meet link
     try:
         linkSelect = int(input('Please enter the digit of your selected google meet link; eg: 1,2,3,...\n'))
-        link = mo[linkSelect-1]
     except ValueError:
         print('Error, please enter only digits')
         getLink()
-    except IndexError:
-        print('Error, selection not found')
-        getLink()
-    return mo[linkSelect-1]
-
+    return linkSelect
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 meetlink = os.path.join(THIS_FOLDER, 'meetlink.txt')
@@ -36,47 +31,35 @@ with open(meetlink, 'r') as fp:
 
 with open(meetlink, 'r') as fp:
     mo = re.findall('https.*', fp.read())
-link = '' 
-link = getLink() #store google meet link to 'link' variable
-print(link)
+link = mo[getLink()-1] #store google meet link to 'link' variable
 
-print('''Bot will take control of your computer for awhile, please do not press anything until mention
-Beginning in 3 seconds...''')
-sleep(3)
-
-print('Bot started')
 pg.hotkey('winleft') #press windows key on keyboard
 sleep(1)
-pg.typewrite('chrome\n',0.1) #type in chrome in search bar and enter
+pg.typewrite('edge\n',0.1) #type in edge in search bar and enter
 sleep(5)
 pg.typewrite(link + '\n') #enter link from meetlink.txt
-pg.hotkey('winkey','up') #fullscreen google chrome
+pg.hotkey('winkey','up') #fullscreen edge
 sleep(5)
 pg.hotkey('ctrl','d') #mute mic
 sleep(1)
 pg.hotkey('ctrl','e') #hide cam
 
 sleep(3)
-join = pg.locateOnScreen('join.png', confidence=0.9)
-pg.click(join[0], join[1]) #join classroom
+pg.click(-376,733) #join classroom
 sleep(1)
-chat = pg.locateOnScreen('chat.png', confidence=0.9)
-pg.click(chat[0], chat[1]) #show chat
+pg.click(-253,382) #show chat
 
 #open obs
 pg.hotkey('winleft') #press windows key on keyboard
 sleep(1)
 pg.typewrite('obs\n',0.1)
-sleep(5)
+sleep(4)
 
 #start recording , requires start recording and stop recording hotkey
-hotkeyRec = 'f9'
+hotkeyRec = 'f1'
 pg.hotkey(hotkeyRec)
 sleep(1)
-pg.hotkey('alt','\t') #alt tab into chrome
-
-print('''Scanning for QR code...
-Bot control paused until QR code is found on screen''')
+pg.hotkey('alt','\t') #alt tab into edge
 
 #QR scanner
 while True:
@@ -100,10 +83,9 @@ while True:
 
         try:
                 hours = (time() - start_time ) / 3600
-                if re.search('mmls.*',attendance): #if attendance found break loop
+                if attendance != '': #if attendance found break loop
                         print('Attendance link found: ' + attendance)
-                        print('Bot control beginning in 3 seconds, please do not touch anything until you are told')
-                        sleep(3)
+                        sleep(2)
                         break
 
                 if hours >= 2:
@@ -126,26 +108,14 @@ sleep(3)
 pg.press('enter') #sign attendance
 sleep(5)
 pg.hotkey('ctrl','w') #close attendance tab
-print('Attendance signed, you may use your computer now, recording will stop after 2 hours')
 
-#after 2 hours, stop recording, close chrome and program
+#after 2 hours, stop recording, close edge and program
 while True:
     hours = (time() - start_time ) / 3600
     if hours >= 2:
         print(hours)
         sleep(1)
-        pg.hotkey('ctrl','w') #close chrome
+        pg.hotkey('ctrl','w') #close edge
         sleep(1)
         pg.hotkey(hotkeyRec) #stop recording
         sys.exit()
-
-    try:
-        left = pg.locateOnScreen('left.png', confidence=0.9)
-        if left:
-            print('Several participants left detected, closing google chrome and stopping recording')
-            pg.hotkey('ctrl','w') #close chrome
-            sleep(1)
-            pg.hotkey(hotkeyRec) #stop recording
-            sys.exit()
-    except:
-        continue
