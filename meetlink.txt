@@ -1,8 +1,2 @@
 #Subject title = google meet link (with user selected)
-CC LAB = https://meet.google.com/thv-nbei-hpg?pli=1&authuser=2
-CC Lec = https://meet.google.com/ung-rxnd-mqt?pli=1&authuser=2
-CI = https://meet.google.com/lookup/br7w4evd7u?authuser=2&hs=179
-ES = https://meet.google.com/lookup/hbv3m73cgk?authuser=2&hs=179
-CV = https://meet.google.com/lookup/fjhwcnibjy?authuser=2&hs=179
-AT LAB = https://meet.google.com/lookup/huoli57sms?pli=1&authuser=2
-AT Lec = https://meet.google.com/lookup/bw4peh6wgi?pli=1&authuser=2
+Example = https://meet.google.com/xxx-xxxx-xxx?pli=1&authuser=2
